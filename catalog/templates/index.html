@@ -1,4 +1,9 @@
-{% extends "base_generic.html" %} {% block content %}
+{% extends "base_generic.html" %} {%block rightsidebar%}
+<h2>Mr Roshan</h2>
+{%endblock%} {% block content %}
+
+<title>Local Library</title>
+
 <h1>Local Library</h1>
 <p>
   Welcome to Local Library, a Website developed by
@@ -11,5 +16,7 @@
   <li><strong>Copies:</strong> {{ num_instances }}</li>
   <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
   <li><strong>Authors:</strong> {{ num_authors }}</li>
+  <li><strong>Books on Loan: </strong>{{ books_on_loan }}</li>
+  <li><strong>Total Genre: </strong>{{totalGenre}}</li>
   {% endblock %}
 </ul>

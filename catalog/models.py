@@ -3,7 +3,10 @@ import uuid  # Required for unique book instances
 from django.db import models
 # Used to generate URLs by reversing the URL patterns
 from django.urls import reverse
-import uuid  # Required for unique book instances
+import uuid
+
+
+# Required for unique book instances
 # Create your models here.
 
 
@@ -43,6 +46,10 @@ class Book(models.Model):
         """Returns the URL to access a detail record for this book."""
         return reverse('book-detail', args=[str(self.id)])
 
+    def display_genre(self):
+        return ', '.join(genre.name for genre in self.genre.all()[:3])
+    display_genre.short_description = 'Genre'
+
 
 class BookInstance(models.Model):
     """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
@@ -51,14 +58,12 @@ class BookInstance(models.Model):
     book = models.ForeignKey('Book', on_delete=models.RESTRICT, null=True)
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
-
     LOAN_STATUS = (
         ('m', 'Maintenance'),
         ('o', 'On loan'),
         ('a', 'Available'),
         ('r', 'Reserved'),
     )
-
     status = models.CharField(
         max_length=1,
         choices=LOAN_STATUS,
@@ -66,6 +71,9 @@ class BookInstance(models.Model):
         default='m',
         help_text='Book availability',
     )
+
+    def book_title(self):
+        return self.book
 
     class Meta:
         ordering = ['due_back']
@@ -87,7 +95,7 @@ class Author(models.Model):
 
     def get_absolute_url(self):
         """Returns the URL to access a particular author instance."""
-        return reverse('author-detail', args=[str(self.id)])
+        return reverse('author-details', args=[str(self.id)])
 
     def __str__(self):
         """String for representing the Model object."""
@@ -99,6 +107,13 @@ class Author(models.Model):
 class Langauge(models.Model):
     name = models.CharField(
         max_length=50, help_text="Enter the language eg: English, french etc")
+
+    def __str__(self):
+        return self.name
+
+
+class Student(models.Model):
+    name = models.CharField(max_length=20, help_text="Enter your name")
 
     def __str__(self):
         return self.name

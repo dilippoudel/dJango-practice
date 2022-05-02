@@ -1,0 +1,39 @@
+{% extends "base_generic.html" %} {% block content %}
+<h1>Book List</h1>
+{% if book_lists %}
+<ul>
+  {% for book in book_lists %}
+  <li>
+    <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
+  </li>
+
+  <li>
+    <a href="http://127.0.0.1:8000/catalog/book/{{book.id}}"
+      >{{ book.title }}</a
+    >
+    ({{book.author}})
+  </li>
+
+  {% endfor %}
+</ul>
+{% else %}
+<p>There are no books in the library.</p>
+
+{% endif %} url ==> http://12.../catlog/books
+<a href="{% url 'bookslist' %}">link which calls some_view</a>
+
+{% endblock %}
+
+<!-- 
+
+id = book.id
+
+ -->
+<!--  
+  singleBook = Book.objects.filter(id = <id>)
+
+  step 1. take the id of individual book to get more info
+  step. based on found ID, we ll query on database take all details of that book
+  
+  
+  -->

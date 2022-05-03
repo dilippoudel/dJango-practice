@@ -1,0 +1,61 @@
+body{
+    background-color: rgba(154, 154, 154, 0.863);
+    font-family: Arial, Helvetica, sans-serif;
+}
+.nav-sidebar{
+    margin-top: 20px;
+}
+ul{
+  list-style: none;  
+ 
+}
+img{
+    height: 200px;
+}
+
+.main{
+    text-align: center;
+}
+.menu-lists{
+    display: flex;
+    align-content: center;
+    column-gap: 50px;
+    padding: 18px 36px;
+    box-shadow: 0 0 5px rgba(68, 68, 68, 0.3);
+    
+}
+ .menu-lists li{
+    font-size: 24px;
+}
+
+li a{
+    text-decoration: none;
+    color: black;
+}
+
+/* Index.html =====> style decoration for home/landing page */
+
+.welcome-section{
+    margin-top: 12px;
+    background-color: rgba(154, 152, 152, 0.762);
+    box-shadow: 0 0 5px rgba(68, 68, 68, 0.3);
+    padding: 6px 12px;
+    background-image: url('./library.jpg');
+    object-fit: cover;
+    object-position: center;
+}
+.heading{
+    font-size: 36px;
+    font-weight: bold;
+}
+.description, .text-description{
+    font-size: 18px;
+    color: rgba(68, 66, 66, 0.866);
+}
+.stats{
+    font-size: 26px;
+    font-weight: normal;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+

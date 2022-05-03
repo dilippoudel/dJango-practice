@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %} {% block content %}
+<h1>Author List</h1>
+{% if author_list %}
+<ul>
+  {% for author in author_list %}
+  <li>
+    <a href="{{ author.get_absolute_url }}"
+      >{{ author.last_name }}, {{author.first_name}}</a
+    >
+  </li>
+
+  {% endfor %}
+</ul>
+{% else %}
+<p>There are no authors in the library.</p>
+
+{% endif %} {% endblock %}
+
+<!-- 
+
+id = book.id
+
+ -->
+<!--  
+  singleBook = Book.objects.filter(id = <id>)
+
+  step 1. take the id of individual book to get more info
+  step. based on found ID, we ll query on database take all details of that book
+  
+  
+  -->

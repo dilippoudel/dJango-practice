@@ -7,22 +7,14 @@
     <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
   </li>
 
-  <li>
-    <a href="http://127.0.0.1:8000/catalog/book/{{book.id}}"
-      >{{ book.title }}</a
-    >
-    ({{book.author}})
-  </li>
+  <li>({{book.author}})</li>
 
   {% endfor %}
 </ul>
 {% else %}
 <p>There are no books in the library.</p>
 
-{% endif %} url ==> http://12.../catlog/books
-<a href="{% url 'bookslist' %}">link which calls some_view</a>
-
-{% endblock %}
+{% endif %} {% endblock %}
 
 <!-- 
 

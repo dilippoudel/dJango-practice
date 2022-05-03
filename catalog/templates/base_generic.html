@@ -15,24 +15,19 @@
     />
 
     <!-- Add additional CSS in static file -->
+    <!-- {% load static %} -->
     {% load static %}
-    <link rel="stylesheet" href="{% static '../static/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'catalog/style.css' %}" />
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-2">
-          {% block sidebar %}
-          <ul class="sidebar-nav" style="text-decoration: none">
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'bookslist' %}">All books</a></li>
-            <li><a href="">All authors</a></li>
-          </ul>
-          {% endblock %}
-        </div>
-        <div class="col-sm-8">{% block content %}{% endblock %}</div>
-        <div class="col-sm-2">{% block rightsidebar %}{% endblock%}</div>
-      </div>
+    <div class="main">
+      {% block sidebar %}
+      <ul class="sidebar-nav menu-lists" style="text-decoration-line: none">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'bookslist' %}">All books</a></li>
+        <li><a href="{% url 'authorlist' %}">All authors</a></li>
+      </ul>
+      {% endblock %} {% block content %}{% endblock %}
     </div>
   </body>
 </html>

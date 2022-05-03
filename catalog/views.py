@@ -1,3 +1,5 @@
+from pyexpat import model
+from re import template
 from django.shortcuts import render
 from .models import Book, Author, BookInstance, Genre
 from django.views import generic
@@ -36,11 +38,6 @@ class BookListView(generic.ListView):
 
 # overriding the method ===>  get_queryset() is a special method in DJango
     def get_queryset(self):
-        # Get 5 books containing the title war
-        # lists = Book.objects.all()
-        # list = Book.objects.filter(title__icontains='the')
-
-        # return {lists, list}
 
         return Book.objects.all()
 
@@ -48,3 +45,12 @@ class BookListView(generic.ListView):
 class BookDetailView(generic.DetailView):
     model = Book
     template_name = 'book_detail.html'
+
+
+class AuthorListView(generic.ListView):
+    model = Author
+# when we don't over ride the template_name, it automatically watch the template in templates/catalog/author_list.html
+
+
+class AuthorDetailView(generic.DetailView):
+    model = Author

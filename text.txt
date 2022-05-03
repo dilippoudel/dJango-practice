@@ -1,0 +1,22 @@
+step 1.
+        http://127.0.0.1:8000/catalog/book/Devkota,%20Laxmi%20Prasad
+
+
+we know
+from url, accessing Id of author
+step 1. when we hover on all Authors ===>>>>    ......./catalog/authors
+step 2: render lists of all authors
+        breakDown ===>
+        define class AuthorListsView
+                ====> it is the child of generic class view which query and provide all records of Authors
+                        model = Author
+
+
+
+### creating list view
+step 1. when we hover on name of author, it provide url with id.
+step 2. render the detail of author of that id
+        breakDown
+        create class AuthorDetailView, it inherits from generic.ListView()
+                ==> by default (generate template)
+                ===>model = Author

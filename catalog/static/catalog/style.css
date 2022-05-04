@@ -22,7 +22,6 @@ img{
     column-gap: 50px;
     padding: 18px 36px;
     box-shadow: 0 0 5px rgba(68, 68, 68, 0.3);
-    
 }
  .menu-lists li{
     font-size: 24px;
@@ -36,21 +35,23 @@ li a{
 /* Index.html =====> style decoration for home/landing page */
 
 .welcome-section{
-    margin-top: 12px;
+    margin-top: 36px;
     background-color: rgba(154, 152, 152, 0.762);
     box-shadow: 0 0 5px rgba(68, 68, 68, 0.3);
     padding: 6px 12px;
-    background-image: url('./library.jpg');
+    height: auto;
     object-fit: cover;
     object-position: center;
 }
 .heading{
+    margin-top: 24px;
+    margin-bottom: 18px;
     font-size: 36px;
     font-weight: bold;
 }
 .description, .text-description{
     font-size: 18px;
-    color: rgba(68, 66, 66, 0.866);
+    color: rgba(24, 23, 23, 0.866);
 }
 .stats{
     font-size: 26px;
@@ -58,4 +59,31 @@ li a{
     margin-top: 24px;
     margin-bottom: 24px;
 }
+.background-image {
+  position: fixed;
+  left: 20%;
+  right: 20%;
+  z-index: 1;
+  display: block;
+  background-image: url('./library.jpg');
+  width: 70%;
+  height: 800px;
+  text-align: center;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}
+
+.content {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: rgba(163, 159, 159, 0.799);
+}
+
 

@@ -18,11 +18,12 @@
     <!-- {% load static %} -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'catalog/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'catalog/book_list.css' %}" />
   </head>
   <body>
     <div class="main">
       {% block sidebar %}
-      <ul class="sidebar-nav menu-lists" style="text-decoration-line: none">
+      <ul class="sidebar-nav menu-lists">
         <li><a href="{% url 'index' %}">Home</a></li>
         <li><a href="{% url 'bookslist' %}">All books</a></li>
         <li><a href="{% url 'authorlist' %}">All authors</a></li>

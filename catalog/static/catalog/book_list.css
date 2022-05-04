@@ -1,0 +1,26 @@
+.book-heading{
+    font-size: 36px;
+}
+
+.booklists{
+    padding: 12px 24px;
+
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-left: 20px;
+}
+th{
+    font-size: 24px;
+}
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+td > a {
+    text-decoration: none;
+    color: black;
+}

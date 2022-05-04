@@ -5,25 +5,34 @@
 <title>Local Library</title>
 
 <div class="welcome-section">
-  <h1 class="heading">Local Library</h1>
-  {% load static %}
-  <!-- <img src="{% static '/catalog/up.jpg' %}" alt="My image" /> -->
-  <p class="description">
-    Welcome to Local Library, a Website developed by
-    <em>MOZILA DEVELOPER NETWORK.</em><br />
-    The propose of the web of this library is to show the basic stats of the
-    available books and its copies. <br />
-    Books are available only for logged in users.
-  </p>
-  <h4 class="heading stats">Stats of the Available Books</h4>
-  <p class="text-description">The library has the following record counts:</p>
-  <ul>
-    <li><strong>Books: </strong>{{num_books}}</li>
-    <li><strong>Copies:</strong> {{ num_instances }}</li>
-    <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
-    <li><strong>Authors:</strong> {{ num_authors }}</li>
-    <li><strong>Books on Loan: </strong>{{ books_on_loan }}</li>
-    <li><strong>Total Genre: </strong>{{totalGenre}}</li>
-    {% endblock %}
-  </ul>
+  <div class="background-image"></div>
+  <div class="content">
+    <h1 class="heading">Local Library</h1>
+    {% load static %}
+    <!-- <img src="{% static '/catalog/up.jpg' %}" alt="My image" /> -->
+    <script>
+      console.log("{{request.session}}");
+      console.log(
+        "You have visited this page {{ num_visits }} time{{ num_visits|pluralize}}"
+      );
+    </script>
+    <p class="description">
+      Welcome to Local Library, a Website developed by
+      <em>MOZILA DEVELOPER NETWORK.</em><br />
+      The propose of the web of this library is to show the basic stats of the
+      available books and its copies. <br />
+      Books are available only for logged in users.
+    </p>
+    <h4 class="heading stats">Stats of the Available Books</h4>
+    <p class="text-description">The library has the following record counts:</p>
+    <ul>
+      <li><strong>Books: </strong>{{num_books}}</li>
+      <li><strong>Copies:</strong> {{ num_instances }}</li>
+      <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
+      <li><strong>Authors:</strong> {{ num_authors }}</li>
+      <li><strong>Books on Loan: </strong>{{ books_on_loan }}</li>
+      <li><strong>Total Genre: </strong>{{totalGenre}}</li>
+      {% endblock %}
+    </ul>
+  </div>
 </div>

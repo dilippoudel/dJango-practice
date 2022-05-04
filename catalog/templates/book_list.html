@@ -1,31 +1,20 @@
 {% extends "base_generic.html" %} {% block content %}
-<h1>Book List</h1>
-{% if book_lists %}
-<ul>
-  {% for book in book_lists %}
-  <li>
-    <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{book.author}})
-  </li>
-
-  <li>({{book.author}})</li>
-
-  {% endfor %}
-</ul>
-{% else %}
-<p>There are no books in the library.</p>
-
+<h1 class="book-heading">Book List</h1>
+<div class="booklists">
+  {% if book_lists %}
+  <table>
+    <tr>
+      <th>Book Title</th>
+      <th>Author</th>
+    </tr>
+    {% for book in book_lists %}
+    <tr>
+      <td><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td>
+      <td><a href="{{ book.author.get_absolute_url }}">{{book.author}}</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>There are no books in the library.</p>
+</div>
 {% endif %} {% endblock %}
-
-<!-- 
-
-id = book.id
-
- -->
-<!--  
-  singleBook = Book.objects.filter(id = <id>)
-
-  step 1. take the id of individual book to get more info
-  step. based on found ID, we ll query on database take all details of that book
-  
-  
-  -->

@@ -4,17 +4,9 @@ from django.contrib import admin
 from .models import Genre, Book, BookInstance, Langauge, Author, Student
 # Register your models here.
 
-
-# Define the admin class
-
-# Define the admin class
-
-# admin.site.register(Book)
-# admin.site.register(Author)
-# Define the admin class
-
-
 # CHALANNGE 1
+
+
 class BookAdmin(admin.ModelAdmin):
     list_display = ('book_title', 'status', 'due_back', 'id')
 
@@ -28,14 +20,15 @@ class BookAdmin(admin.ModelAdmin):
 # Register the Admin classes for BookInstance using the decorator
 
 
+@admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_filter = ('status', 'due_back')
+    list_filter = ('status', 'due_back', 'book', 'id', 'borrower')
     fieldsets = (
         ('Book Details', {
             'fields': ('book', 'imprint', 'id')
         }),
         ('Availability', {
-            'fields': ('status', 'due_back')
+            'fields': ('status', 'due_back', 'borrower')
         })
     )
 
@@ -69,4 +62,3 @@ class AuthorAdmin(admin.ModelAdmin):
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Genre)
 admin.site.register(Langauge)
-admin.site.register(Student)

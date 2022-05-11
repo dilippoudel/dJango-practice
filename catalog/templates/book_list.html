@@ -1,5 +1,10 @@
 {% extends "base_generic.html" %} {% block content %}
 <h1 class="book-heading">Book List</h1>
+<button class="create-new-book"><a href="/catalog/book/add-new-book">Create New Book</a> </button>
+<script>
+
+  console.log("{{ perms.catalog.can_mark_returned }}");
+</script>
 <div class="booklists">
   {% if book_lists %}
   <table>
@@ -9,12 +14,17 @@
     </tr>
     {% for book in book_lists %}
     <tr>
+
       <td><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td>
       <td><a href="{{ book.author.get_absolute_url }}">{{book.author}}</a></td>
+      <td><a href="{% url 'edit-book' book.id %}">Edit</a>|<a href="{%url 'delete-book' book.id %}">Delete</a></td>
+
     </tr>
     {% endfor %}
   </table>
+
   {% else %}
   <p>There are no books in the library.</p>
+
 </div>
 {% endif %} {% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>Creating a book</h2>
+    <form action="/catalog/book/add-new-book" method="post">
+        {% csrf_token %}
+        <label for="title">Title</label>
+        <input name="title" type="text"><br><br>
+        <label for="author">Author</label>
+        <select id="author" name="author">
+            <option value="none" selected disabled hidden>Select Authors</option>
+            {% for author in authors %}
+            <option value="{{ author.id }}">{{ author.first_name }} {{author.last_name}}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="summary">Summary</label>
+        <textarea name="summary" id="" cols="30" rows="10"></textarea><br><br>
+        <label for="isbn">ISBN</label>
+        <input type="text" name="isbn"><br><br>
+        <label for="genre">Select Genre</label>
+          <select id="genre" name="genre">
+              <option value="none" selected disabled hidden>Select Genre</option>
+              {% for genre in genres %}
+            <option value="{{genre.id}}">{{ genre.name }}</option>
+            {% endfor %}
+        </select><br><br>
+                <label for="language" name="language">Select Language</label>
+        <select id="language">
+            <option value="none" selected disabled hidden>Select Language</option>
+            {% for language in languages %}
+            <option value="{{ language.id }}" default="select language">{{ language.name }}</option>
+            {% endfor %}
+        </select><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

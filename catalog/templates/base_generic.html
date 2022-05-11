@@ -24,11 +24,18 @@
     <div class="main">
       {% block sidebar %}
       <ul class="sidebar-nav menu-lists">
+        {% if user.is_authenticated %}
+        <li>User: {{ user.get_username }}</li>
         <li><a href="{% url 'index' %}">Home</a></li>
         <li><a href="{% url 'bookslist' %}">All books</a></li>
         <li><a href="{% url 'authorlist' %}">All authors</a></li>
+        <li><a href="{% url 'my-borrowed' %}">My Books</a></li>
+        <li><a href="{% url 'all-borrowed' %}">All Borrowed</a></li>
+        <li><a href="{% url 'logout'%} ">Logout</a></li>
       </ul>
-      {% endblock %} {% block content %}{% endblock %}
+      {% else %}
+      <li><a href="{% url 'login'%}">Login</a></li>
+      {% endif %} {% endblock %} {% block content %}{% endblock %}
     </div>
   </body>
 </html>

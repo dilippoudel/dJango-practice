@@ -20,3 +20,17 @@ step 2. render the detail of author of that id
         create class AuthorDetailView, it inherits from generic.ListView()
                 ==> by default (generate template)
                 ===>model = Author
+
+
+
+
+step 1 define url and create a page to show all borrowed books for libarian
+        /catalog/borrowed
+
+
+        task create 2 pages as show in pic
+        pages should be visible only for logged in libarian users
+
+
+
+1. render the button in each row edit and delete in all-book-list template

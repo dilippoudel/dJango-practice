@@ -11,6 +11,7 @@
             <label for="title">Book Title</label>
             <input type="text" name="title" value="{{ title }}" ><br>
             <label for="author" name="author">Author</label>
+            <a href="{% url 'create-author'%}">Create new author</a>
         <select for="author" name="author">
             {% for author in authors %}
             <option value="{{ author.id }}">{{ author.first_name }} {{author.last_name}}</option>
@@ -20,8 +21,8 @@
         <label for="summary">Summary</label>
         <textarea name="summary" id="" cols="30" rows="10">{{ summary }}</textarea><br><br>
         <label for="isbn">ISBN</label>
-        <input type="text" name="isbn" value="{{ isbn }}" required minlength="13" ><br><br>
-            <p>{{message}}</p>
+        <input type="text" name="isbn" value="{{ isbn }}" required maxlength="13" ><br><br>
+            <p style="color:red">{{message}}</p>
         <label for="genre">Select Genre</label>
           <select id="genre" name="genre">
               <option value="none" selected disabled hidden>Select Genre</option>

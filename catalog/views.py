@@ -4,7 +4,7 @@ from pyexpat import model
 from re import template
 from django.shortcuts import render, redirect
 
-from .models import Book, Author, BookInstance, Genre, Langauge
+from .models import Book, Author, BookInstance, Genre, Langauge, Contact
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -15,7 +15,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpRequest
 from django.urls import reverse
 
-from catalog.forms import RenewBookForm, NameForm, RegistrationForm
+from catalog.forms import RenewBookForm, NameForm, RegistrationForm, AuthorRegistration, ContactForm
 
 
 class MyView(LoginRequiredMixin):
@@ -159,63 +159,68 @@ def get_name(request):
 """view for editing book page"""
 
 
-def edit_book(request, pk):
-    allBooks = Book.objects.all()
-    authors = Author.objects.all()
-    genres = Genre.objects.all()
-    language = Langauge.objects.all()
+def edit_book(request, pk=None):
+    if pk is not None:
+        allBooks = Book.objects.all()
+        authors = Author.objects.all()
+        genres = Genre.objects.all()
+        language = Langauge.objects.all()
 
-    def finding_current_model_book():
-        for x in range(len(allBooks)):
-            if allBooks[x].id == pk:
-                return allBooks[x]
-        return allBooks[x]
+        def finding_current_model_book():
+            for x in range(len(allBooks)):
+                if allBooks[x].id == pk:
+                    return allBooks[x]
+            return allBooks[x]
 
-    book_name = finding_current_model_book()
-    title = book_name.title
-    b_id = pk
-    isbn = book_name.isbn
-    summary = book_name.summary
-    author_id = book_name.author_id
-    from pprint import pprint
+        book_name = finding_current_model_book()
+        title = book_name.title
+        b_id = pk
+        isbn = book_name.isbn
+        summary = book_name.summary
+        author_id = book_name.author_id
+        from pprint import pprint
 
-    current_author = Author.objects.get(id=author_id)
+        current_author = Author.objects.get(id=author_id)
 
-    message=''
-    context = {
-        "title": title,
-        "id": b_id,
-        "isbn": isbn,
-        "summary": summary,
-        "author_id": author_id,
-        'authors': authors,
-        'languages': language,
-        'genres': genres,
-        'current_author': current_author,
-        'message': message,
-    }
-    if request.method == 'POST':
-        form = request.POST
-        record_book = Book(
-            title=form['title'],
-            summary=form['summary'],
-            isbn=form['isbn'],
-            author_id=form['author']
-        )
-        isExitsIsbn = Book.objects.get(isbn=form['isbn'])
+        message = ''
+        context = {
+            "title": title,
+            "id": b_id,
+            "isbn": isbn,
+            "summary": summary,
+            "author_id": author_id,
+            'authors': authors,
+            'languages': language,
+            'genres': genres,
+            'current_author': current_author,
+            'message': message,
+        }
+        if request.method == 'POST':
+            form = request.POST
+            record_book = Book(
+                title=form['title'],
+                summary=form['summary'],
+                isbn=form['isbn'],
+                author_id=form['author']
+            )
+            print('#####################################################')
+            print(form['isbn'])
+            isExitsIsbn = Book.objects.filter(isbn=form['isbn'])
 
-        if isExitsIsbn:
-            message = 'The ISBN already exits.'
-            context['message'] = message
-            return render(request, 'catalog/edit.html', context)
+            if isExitsIsbn:
+                message = 'The ISBN already exits.'
+                context['message'] = message
+                return render(request, 'catalog/edit.html', context)
+            else:
+                print('all good')
 
-        print('############')
-        print(isExitsIsbn)
+            record_book.save()
+            return redirect('/catalog/books')
+        return render(request, 'catalog/edit.html', context)
 
-        # record_book.save()
-        return redirect('/catalog/books')
+    else:
 
-    return render(request, 'catalog/edit.html', context)
+        return render(request, 'catalog/edit.html', context={})
 
 
 def delete_book(request, pk):
@@ -279,3 +284,45 @@ def registration_form(request):
             "form": form
         }
     return render(request, 'catalog/registration_form.html', context)
+
+
+# creating author
+def create_author(request):
+    if request.method == 'POST':
+        form = AuthorRegistration(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            new_author = Author(
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
+                date_of_birth=form.cleaned_data['date_of_birth'],
+                date_of_death=form.cleaned_data['date_of_dead']
+            )
+            new_author.save()
+            redirect('/catalog/authors')
+    else:
+        form = AuthorRegistration()
+    context = {
+        "form": form
+    }
+    return render(request, 'catalog/create_author.html', context)
+
+
+def contact_form(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            record_contact = Contact(
+                name=form.cleaned_data['name'],
+                email=form.cleaned_data['email'],
+                message=form.cleaned_data['message'],
+                phone=form.cleaned_data['contact']
+            )
+            record_contact.save()
+    else:
+        form = ContactForm()
+    context = {
+        'form': form
+    }
+
+    return render(request, 'catalog/contact.html', context)

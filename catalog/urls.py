@@ -16,5 +16,7 @@ urlpatterns = [
     path('user/sign-up/', views.registration_form, name='registration-name'),
     path('book/edit/<int:pk>',views.edit_book, name='edit-book'),
     path('book/delete/<int:pk>', views.delete_book, name='delete-book'),
-    path('book/add-new-book',views.add_book, name='add-book' )
+    path('book/edit/',views.edit_book, name='edit-book' ),
+    path('author/create/', views.create_author, name='create-author'),
+    path('contact/', views.contact_form, name='contact-form')
 ]

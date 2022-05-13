@@ -50,6 +50,7 @@ class Book(models.Model):
 
     def display_genre(self):
         return ', '.join(genre.name for genre in self.genre.all()[:3])
+
     display_genre.short_description = 'Genre'
 
 
@@ -129,3 +130,14 @@ class Student(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=50, help_text="Enter your Full name")
+    email = models.EmailField(help_text="Enter your valid Email Address")
+    message = models.CharField(max_length=500)
+    phone = models.CharField(max_length=10, help_text="Enter Your contact details")
+
+    def __str__(self):
+        return self.email
+

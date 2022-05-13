@@ -5,8 +5,11 @@
 
 <ul>
   {% for bookinst in bookinstance_list %}
+  <script>
+    console.log(bookinst.book.id)
+  </script>
   <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
-    <a href="{% url 'book-detail' bookinst.book.pk %}"
+    <a href="{% url 'all-borrowed' %}"
       >{{bookinst.book.title}}</a
     >
     {% if perms.catalog.can_mark_returned %}-

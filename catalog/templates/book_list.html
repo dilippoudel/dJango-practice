@@ -1,6 +1,6 @@
 {% extends "base_generic.html" %} {% block content %}
 <h1 class="book-heading">Book List</h1>
-<button class="create-new-book"><a href="/catalog/book/add-new-book">Create New Book</a> </button>
+<button class="create-new-book"><a href="/catalog/book/edit">Create New Book</a> </button>
 <script>
 
   console.log("{{ perms.catalog.can_mark_returned }}");

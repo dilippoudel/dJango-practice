@@ -39,13 +39,28 @@ class RegistrationForm(forms.Form):
 
 
 
-    """def clean_registration_form(self):
-        if self.password != self.confirm_password:
-            raise ValidationError(_(f"password didn't match"))
-        return self
-        """
 
 
+#Forms for Creating new Authors
+# step 1: Define all the filed to render template
+class AuthorRegistration(forms.Form):
+    first_name = forms.CharField(label="First Name",max_length=50,help_text='Enter Your First Name')
+    last_name = forms.CharField(label="Last Name",max_length=50, help_text='Enter Your Last Name')
+    date_of_birth = forms.DateField(label="Date Of Birth",help_text='Enter the date atleast earlier 20', required=False)
+    date_of_dead = forms.DateField(label="Date Of Dead",help_text='Enter the date after birth date', required=False)
 
-#Forms for Editing
 
+    """
+    2025
+    date of birth 20 years old
+    date of death afte > 20 years
+    // publixhed date after date age
+    
+    """
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(label='Enter Your Full name', max_length=50)
+    email = forms.EmailField(label='Enter Your Email Address')
+    message = forms.CharField(label='Enter the message', help_text="Describe your case, No more than 500  Chars", max_length=500)
+    contact = forms.CharField(label='Contact no: ', max_length=10, help_text="Enter contact Number (Only 10 digits)")

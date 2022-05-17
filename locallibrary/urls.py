@@ -20,16 +20,20 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
-from catalog import views
-
+from locallibrary import views as library_view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('catalog/', include('catalog.urls')),
-    path('', RedirectView.as_view(url='catalog/', permanent=True)),
-    path('accounts/', include('django.contrib.auth.urls')),
-
+     path('', library_view.home_page, name='home'),
+     path('admin/', admin.site.urls),
+     path('', RedirectView.as_view(url='', permanent=True)),
+     path('accounts/', include('django.contrib.auth.urls')),
+     path('catalog/', include('catalog.urls')),
 ]
-
+STATIC_ROOT = "static/"
 # use of static() to add URL maping to serve static files deuring development (only)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# Local Library main route
+# root/home -> own views home view function
+# root/catalog -> points to catalog route
+# root empty -> Redirects to catalog/ -> '' view

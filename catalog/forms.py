@@ -27,16 +27,32 @@ class NameForm(forms.Form):
     your_name = forms.CharField(label='Your Name', max_length=100)
 
 
+
+# custom validation for matching password and email check
+def validate_email(value):
+    if "@gmail.com" in value:
+        return value
+    else:
+        raise ValidationError("Please submit the gmail address")
+    return value
+
+    """def is_password_match(value):
+        password = self.cleaned_data['password']
+        repeat_password = self.cleaned_data['confirm_password']
+        if password == repeat_password:
+            return password, repeat_password
+        else:
+            raise ValidationError("Your password didn't match")
+        return password, repeat_password"""
+
 #step 1 Registration form
 class RegistrationForm(forms.Form):
-    first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control','style': 'max-width: 300px;'}),label="Firstname")
-    last_name = forms.CharField(label="Lastname", max_length=50, widget=forms.TextInput(attrs={'class':'form-control','style': 'max-width: 300px;'}))
-    email = forms.EmailField(label="Email", widget=forms.TextInput(attrs={'class':'form-control','style': 'max-width: 300px;'}))
-    username = forms.CharField(label="Username", min_length=6, max_length=12, widget=forms.TextInput(attrs={'class':'form-control','style': 'max-width: 300px;'}))
-    password = forms.CharField(label="Password", widget=forms.TextInput(attrs={'class':'form-control','style': 'max-width: 300px;'}))
-    confirm_password = forms.CharField(label="ConfirmCharField", widget=forms.TextInput(attrs={'class':'form-control','style': 'max-width: 300px;'}))
-
-
+    first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}),label="Firstname")
+    last_name = forms.CharField(label="Lastname", max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
+    email = forms.EmailField(label="Email", widget=forms.TextInput(attrs={'class':'form-control'}), validators=[validate_email])
+    username = forms.CharField(label="Username", min_length=6, max_length=12, widget=forms.TextInput(attrs={'class':'form-control'}))
+    password = forms.CharField(label="Password", widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    confirm_password = forms.CharField(label="Confirm password", widget=forms.TextInput(attrs={'class':'form-control'}))
 
 
 

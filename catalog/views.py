@@ -18,11 +18,6 @@ from django.urls import reverse
 from catalog.forms import RenewBookForm, NameForm, RegistrationForm, AuthorRegistration, ContactForm
 
 
-class MyView(LoginRequiredMixin):
-    login_url = '/login/'
-    redirect_field_name = 'redirect_to'
-
-
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing books on loan to current user."""
     model = BookInstance
@@ -277,7 +272,9 @@ def registration_form(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            return HttpResponseRedirect('/catalog')
+            print(form.cleaned_data)
+            return redirect('/catalog')
+
     else:
         form = RegistrationForm()
         context = {
@@ -299,7 +296,7 @@ def create_author(request):
                 date_of_death=form.cleaned_data['date_of_dead']
             )
             new_author.save()
-            redirect('/catalog/authors')
+            return redirect('/catalog/authors')
     else:
         form = AuthorRegistration()
     context = {
@@ -326,3 +323,9 @@ def contact_form(request):
     }
 
     return render(request, 'catalog/contact.html', context)
+
+
+# default page when user visit the page first
+
+def home_page(request):
+    return render(request, 'catalog/home_page.html', context={})

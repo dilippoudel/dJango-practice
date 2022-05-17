@@ -1,5 +1,5 @@
-{% extends "base_generic.html" %} {%block rightsidebar%}
-{%endblock%} {% block content %}
+{% extends "base_generic.html" %}
+{% block content %}
 
 <title>Local Library</title>
 
@@ -8,13 +8,6 @@
   <div class="content">
     <h1 class="heading">Local Library</h1>
     {% load static %}
-    <!-- <img src="{% static '/catalog/up.jpg' %}" alt="My image" /> -->
-    <script>
-      console.log("{{request.session}}");
-      console.log(
-        "You have visited this page {{ num_visits }} time{{ num_visits|pluralize}}"
-      );
-    </script>
     <p class="description">
       Welcome to Local Library, a Website developed by
       <em>MOZILA DEVELOPER NETWORK.</em><br />
@@ -34,4 +27,5 @@
       {% endblock %}
     </ul>
   </div>
+
 </div>

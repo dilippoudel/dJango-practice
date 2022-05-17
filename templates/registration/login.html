@@ -1,32 +1,38 @@
-{% extends "base_generic.html" %} {% block content %} {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %} {% if next %} {% if user.is_authenticated %}
-<p>
-  Your account doesn't have access to this page. To proceed, please login with
-  an account that has access.
-</p>
-{% else %}
-<p>Please login to see this page.</p>
-{% endif %} {% endif %}
+{% extends "base_generic.html" %} {% block content %}
+<div class="container" style="margin-top:100px; box-shadow: 0 0 5px rgba(0,0,0,0.3); padding: 8px 12px">
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>
+              Your account doesn't have access to this page. To proceed, please login with
+              an account that has access.
+            </p>
+        {% else %}
+            <p>Please login to see  the next page.</p>
+        {% endif %}
+    {% endif %}
+
 
 <form method="post" action="{% url 'login' %}">
   {% csrf_token %}
-  <table>
-    <tr>
-      <td>{{ form.username.label_tag }}</td>
-      <td>{{ form.username }}</td>
-    </tr>
-    <tr>
-      <td>{{ form.password.label_tag }}</td>
-      <td>{{ form.password }}</td>
-    </tr>
-  </table>
-  <input type="submit" value="login" />
-  <input type="hidden" name="next" value="{{ next }}" />
+   <div class="mb-3 row">
+    <label for="username" class="col-sm-2 col-form-label">Username</label>
+    <div class="col-sm-8">
+  <input type="input" class="form-control" name="username" id="inputEmail" placeholder="Username" required >
+    </div>
+  </div>
+   <div class="mb-3 row">
+    <label for="password" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-8">
+  <input type="password" class="form-control" name="password" id="inputPass" placeholder="Password" required>
+    </div>
+  </div>
+     <button type="submit" class="btn btn-primary">Login</button>
 </form>
-
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
-{% endblock %}
-<!-- http://127.0.0.1:8000/accounts/login/?next=/accounts/login/ -->
+    <a href="/password_reset">Reset Password</a>
+    <p>Or</p>
+    <a href="{% url 'registration-name' %}"><button class="btn btn-success">Sign Up</button></a>
+    {% endblock %}
+</div>

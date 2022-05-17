@@ -1,8 +1,19 @@
 {% extends "base_generic.html" %} {% block content %}
 <form action="/" method="post">
     {% csrf_token %}
-    {{ form }}
+    {% for field in form %}
+      <div class="mb-3 row">
+    <label for="{{field.label}}" class="col-sm-4 col-form-label">{{field.label}}</label>
+    <div class="col-sm-8">
+        {% if field.label == 'Password' or field.label == 'Confirm password' %}
+            <input type="password" class="form-control" id="{{field.label}}">
+        {% else %}
+            <input type="text" class="form-control" id="{{field.label}}Password">
+        {% endif %}
+    </div>
+      </div>
+    {% endfor %}
 
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" class="btn btn-secondary">
 </form>
 {% endblock %}

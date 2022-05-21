@@ -1,0 +1,27 @@
+ul{
+display: none;
+}
+.helptext{
+display: block;
+font-size: 12px;
+color : #929292;
+margin-left: 76px;
+}
+button{
+background-color: #929292;
+border: none;
+padding: 8px 12px;
+border-radius: 4px;
+font-size: 18px;
+}
+label{
+    margin-left: 72px;
+    margin-right: 24px;
+}
+form{
+    margin-top: 72px;
+}
+input{
+border-radius: 2px;
+border-width: 1px;
+}

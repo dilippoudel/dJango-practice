@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'catalog/home_page.css' %}"/>
+    <link rel="stylesheet" href="{% static 'catalog/home_page.css' %}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js">
+    <title>Title</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<section class="header">
+    <p class="logo">CALC LIB</p>
+    <input class="search-bar" type="text" placeholder="Search with Keywords">
+    <ul class="items">
+        <li>Home</li>
+        <li>About</li>
+        <li>Blogs</li>
+        <li>Contact</li>
+        <li>
+            <a href="/catalog">
+                <button class="btn btn-primary">Sign in</button>
+            </a>
+        </li>
+    </ul>
+
+</section>
+<section class="container-section">
+    <div class="first-column-container">
+        <div class="left-upper-container">
+            <img src="{% static 'catalog/images/img-1.jpeg' alt='Library Image' %}" alt="">
+            <a class="title">Espoo Library opened again from 16.5</a>
+            <a class="description">The Hakunila library has been closed due to improvements to indoor air quality from
+                16 May to 14 September 2022. <br> The library car will serve in Hakunila in May-June. Loans can be
+                returned
+                to any Helmet library.</a>
+        </div>
+        <div class="right-upper-container">
+            <div class="upper-child">
+                <div class="first-child">
+                    <img src="{% static 'catalog/images/img-2.jpeg' %}" alt=""/>
+                    <a href="">Renewal of loans</a>
+
+                </div>
+                <div class="second-child">
+                    <img src="{% static 'catalog/images/img-3.jpeg' %}" alt="">
+                    <a href="">Lock your booking on holiday</a>
+                </div>
+            </div>
+            <div class="lower-child">
+                <div class="third-child">
+                    <img src="{% static 'catalog/images/img-4.jpeg' %}" alt="">
+                    <a href="">Online Payment</a>
+                    <p>Pay your library fees online.</p>
+                </div>
+                <div class="forth-child">
+                    <img src="{% static 'catalog/images/img-5.jpeg' %}" alt="">
+                    <a class="title" href="">Pocket Library</a>
+                    <a href="">Pocket Library is a mobile application for Helmet library customers.</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="second-column-container">
+        <div class="left-lower-container">
+            <div class="first-left-child">
+                <img src="{% static 'catalog/images/img-6.jpeg' %}" alt="">
+                <div class="content">
+                    <p class="title">Influence the future of Espoo City Library!</p>
+                    <p class="description">
+                        What will the library of the future look like in Espoo when it comes to saving <br> the city's
+                        expenses?
+                        Answer the survey and tell us what kind of library network <br> would best serve the people of
+                        Espoo!
+                    </p>
+                </div>
+            </div>
+            <div class="first-left-child">
+                <img src="{% static 'catalog/images/img-7.jpeg' %}" alt="">
+                <div class="content">
+                    <p class="title">Influence the future of Espoo City Library!</p>
+                    <p class="description">
+                        What will the library of the future look like in Espoo when it comes to saving <br> the city's
+                        expenses?
+                        Answer the survey and tell us what kind of library network <br> would best serve the people of
+                        Espoo!
+                    </p>
+                </div>
+
+            </div>
+            <div class="first-left-child">
+                <img src="{% static 'catalog/images/img-8.jpeg' %}" alt="">
+                <div class="content">
+                    <p class="title">Influence the future of Espoo City Library!</p>
+                    <p class="description">
+                        What will the library of the future look like in Espoo when it comes to saving <br> the city's
+                        expenses?
+                        Answer the survey and tell us what kind of library network <br> would best serve the people of
+                        Espoo!
+                    </p>
+                </div>
+
+            </div>
+            <div class="first-left-child">
+                <img src="{% static 'catalog/images/img-6.jpeg' %}" alt="">
+                <div class="content">
+                    <p class="title">Influence the future of Espoo City Library!</p>
+                    <p class="description">
+                        What will the library of the future look like in Espoo when it comes to saving <br> the city's
+                        expenses?
+                        Answer the survey and tell us what kind of library network <br> would best serve the people of
+                        Espoo!
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <div class="right-lower-container">
+            <img src="{% static 'catalog/images/img-9.jpeg' %}" alt="">
+            <a class="title">Instructions for e-book and audiobook services</a>
+            <p class="description">Read what you need to use the library's e-books and audiobooks and download them to
+                your device.</p>
+        </div>
+    </div>
+</section>
+<div class="footer">
+    <h3 class="foot-header">CALC LIB</h3>
+    <div class="footer-shortcut">
+        <div class="services">
+            <h5 class="service-title">LIBRARIES AND SERVICES</h5>
+            <ul class="service-lists">
+                <li class="item"><a href="">Digital support</a></li>
+                <li class="item"><a href="">Remote Service</a></li>
+                <li class="item"><a href="">Mobile Library</a></li>
+                <li class="item"><a href="">Home service and flexibility</a></li>
+                <li class="item"><a href="">Items to borrow</a></li>
+                <li class="item"><a href="">Work and have fun</a></li>
+            </ul>
+        </div>
+        <div class="services">
+            <h5 class="service-title">E-LIBRARY</h5>
+            <ul class="service-lists">
+                <li class="item"><a href="">Digital support</a></li>
+                <li class="item"><a href="">Remote Service</a></li>
+                <li class="item"><a href="">Mobile Library</a></li>
+                <li class="item"><a href="">Home service and flexibility</a></li>
+                <li class="item"><a href="">Items to borrow</a></li>
+                <li class="item"><a href="">Work and have fun</a></li>
+            </ul>
+        </div>
+        <div class="services">
+            <h5 class="service-title">EVENT AND TIPS</h5>
+            <ul class="service-lists">
+                <li class="item"><a href="">Literature Prize</a></li>
+                <li class="item"><a href="">Proceedings</a></li>
+                <li class="item"><a href="">Tips</a></li>
+                <li class="item"><a href="">News pieces</a></li>
+                <li class="item"><a href="">Blogs</a></li>
+                <li class="item"><a href="">Social Media</a></li>
+            </ul>
+        </div>
+        <div class="services">
+            <h5 class="service-title">CHILDREN</h5>
+            <ul class="service-lists">
+                <li class="item"><a href="">Proceedings</a></li>
+                <li class="item"><a href="">Stuff about libraries</a></li>
+                <li class="item"><a href="">Information retrieval</a></li>
+                <li class="item"><a href="">Material bank</a></li>
+                <li class="item"><a href="">Book tips</a></li>
+                <li class="item"><a href="">School and kindergarten</a></li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+</div>
+
+</body>
+</html>

@@ -17,7 +17,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpRequest
 from django.urls import reverse, reverse_lazy
 
-from catalog.forms import RenewBookForm, NameForm, RegistrationForm, AuthorRegistration, ContactForm
+from catalog.forms import RenewBookForm, NameForm, RegistrationForm, AuthorRegistration, ContactForm, \
+    CreatingBookAndEditing
 
 
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
@@ -138,86 +139,72 @@ def renew_book_librarian(request, pk):
     return render(request, 'catalog/book_renew_librarian.html', context)
 
 
-def get_name(request):
-    if request.method == 'POST':
-        form = NameForm(request.POST)
-        if form.is_valid():
-            """ do you own acts like saving data into data base, or retrieving the data or anymore
-            """
-            return HttpResponseRedirect('/catalog/books')
-    else:
-        form = NameForm()
-        context = {
-            "form": form
-        }
-    return render(request, 'catalog/name.html', context)
-
-
 """view for editing book page"""
 
 
-def edit_book(request, pk=None):
-    if pk is not None:
-        allBooks = Book.objects.all()
-        authors = Author.objects.all()
-        genres = Genre.objects.all()
-        language = Langauge.objects.all()
-
-        def finding_current_model_book():
-            for x in range(len(allBooks)):
-                if allBooks[x].id == pk:
-                    return allBooks[x]
-            return allBooks[x]
-
-        book_name = finding_current_model_book()
-        title = book_name.title
-        b_id = pk
-        isbn = book_name.isbn
-        summary = book_name.summary
-        author_id = book_name.author_id
-        from pprint import pprint
-
-        current_author = Author.objects.get(id=author_id)
-
-        message = ''
-        context = {
-            "title": title,
-            "id": b_id,
-            "isbn": isbn,
-            "summary": summary,
-            "author_id": author_id,
-            'authors': authors,
-            'languages': language,
-            'genres': genres,
-            'current_author': current_author,
-            'message': message,
-        }
-        if request.method == 'POST':
-            form = request.POST
-            record_book = Book(
-                title=form['title'],
-                summary=form['summary'],
-                isbn=form['isbn'],
-                author_id=form['author']
-            )
-            print('#####################################################')
-            print(form['isbn'])
-            isExitsIsbn = Book.objects.filter(isbn=form['isbn'])
-
-            if isExitsIsbn:
-                message = 'The ISBN already exits.'
-                context['message'] = message
-                return render(request, 'catalog/edit.html', context)
-            else:
-                print('all good')
-
-            record_book.save()
-            return redirect('/catalog/books')
-        return render(request, 'catalog/edit.html', context)
-
-    else:
-
-        return render(request, 'catalog/edit.html', context={})
+#
+# def edit_book(request, pk=None):
+#     if pk is not None:
+#         allBooks = Book.objects.all()
+#         authors = Author.objects.all()
+#         genres = Genre.objects.all()
+#         language = Langauge.objects.all()
+#
+#         def finding_current_model_book():
+#             for x in range(len(allBooks)):
+#                 if allBooks[x].id == pk:
+#                     return allBooks[x]
+#             return allBooks[x]
+#
+#         book_name = finding_current_model_book()
+#         title = book_name.title
+#         b_id = pk
+#         isbn = book_name.isbn
+#         summary = book_name.summary
+#         author_id = book_name.author_id
+#         from pprint import pprint
+#
+#         current_author = Author.objects.get(id=author_id)
+#
+#         message = ''
+#         context = {
+#             "title": title,
+#             "id": b_id,
+#             "isbn": isbn,
+#             "summary": summary,
+#             "author_id": author_id,
+#             'authors': authors,
+#             'languages': language,
+#             'genres': genres,
+#             'current_author': current_author,
+#             'message': message,
+#         }
+#         if request.method == 'POST':
+#             form = request.POST
+#             record_book = Book(
+#                 title=form['title'],
+#                 summary=form['summary'],
+#                 isbn=form['isbn'],
+#                 author_id=form['author']
+#             )
+#             print('#####################################################')
+#             print(form['isbn'])
+#             isExitsIsbn = Book.objects.filter(isbn=form['isbn'])
+#
+#             if isExitsIsbn:
+#                 message = 'The ISBN already exits.'
+#                 context['message'] = message
+#                 return render(request, 'catalog/edit.html', context)
+#             else:
+#                 print('all good')
+#
+#             record_book.save()
+#             return redirect('/catalog/books')
+#         return render(request, 'catalog/edit.html', context)
+#
+#     else:
+#
+#         return render(request, 'catalog/edit.html', context={})
 
 
 def delete_book(request, pk):
@@ -240,6 +227,18 @@ def delete_book(request, pk):
     }
     print(allBooks)
 
+    return render(request, 'catalog/delete.html', context)
+
+
+def delete_author(request, pk):
+    if request.method == 'POST':
+        author_to_delete = Author.objects.get(id=pk)
+        author_to_delete.delete()
+        return redirect('/catalog/authors')
+    context = {
+        "id": pk,
+        'req': 'author/delete',
+    }
     return render(request, 'catalog/delete.html', context)
 
 
@@ -296,7 +295,6 @@ def create_author(request):
     if request.method == 'POST':
         form = AuthorRegistration(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
             new_author = Author(
                 first_name=form.cleaned_data['first_name'],
                 last_name=form.cleaned_data['last_name'],
@@ -309,6 +307,37 @@ def create_author(request):
         form = AuthorRegistration()
     context = {
         "form": form
+    }
+    return render(request, 'catalog/create_author.html', context)
+
+
+def edit_author(request, pk):
+    current_author = Author.objects.get(id=pk)
+
+    if request.method == 'POST':
+        form = AuthorRegistration(request.POST)
+        if form.is_valid():
+            # we will save the data coming from form
+            current_author.first_name = form.cleaned_data['first_name']
+            current_author.last_name = form.cleaned_data['last_name']
+            current_author.date_of_birth = form.cleaned_data['date_of_birth']
+            current_author.date_of_dead = form.cleaned_data['date_of_dead']
+            print(current_author.last_name)
+            current_author.save()
+            print('data is valid')
+            return redirect('/catalog/authors')
+    else:
+        form = AuthorRegistration(initial={
+            'first_name': current_author.first_name,
+            'last_name': current_author.last_name,
+            'date_of_birth': current_author.date_of_birth,
+            'date_of_dead': current_author.date_of_death
+        })
+
+    context = {
+        'form': form,
+        'id': pk,
+        'req': 'edit',
     }
     return render(request, 'catalog/create_author.html', context)
 
@@ -333,7 +362,60 @@ def contact_form(request):
     return render(request, 'catalog/contact.html', context)
 
 
+# create books
+def create_new_books(request):
+    form = CreatingBookAndEditing(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            print(form.cleaned_data)
+            new_book = Book(
+                title=form.cleaned_data['title'],
+                author_id=form.cleaned_data['author'],
+                summary=form.cleaned_data['summary'],
+                isbn=form.cleaned_data['isbn'],
+            )
+            new_book.save()
+
+            return redirect('/catalog/books')
+    else:
+        form = CreatingBookAndEditing()
+    context = {
+        'form': form
+    }
+    return render(request, 'catalog/create_book.html', context)
+
+
+# editing books
+def edit_book(request, pk):
+    current_book = Book.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CreatingBookAndEditing(request.POST)
+        if form.is_valid():
+            # we will save the data to database
+            current_book.title = form.cleaned_data['title']
+            current_book.summary = form.cleaned_data['summary']
+            current_book.isbn = form.cleaned_data['isbn']
+            current_book.author_id = form.cleaned_data['author']
+            current_book.save()
+            return redirect('/catalog/books')
+    else:
+        form = CreatingBookAndEditing(initial={
+            'title': current_book.title,
+            'author': current_book.author_id,
+            'summary': current_book.summary,
+            'isbn': current_book.isbn,
+        })
+    context = {
+        'form': form,
+        'target': 'editing',
+        'id': pk,
+    }
+    print('hello there')
+    return render(request, 'catalog/create_book.html', context)
+
+
 # default page when user visit the page first
+
 
 def home_page(request):
     return render(request, 'catalog/home_page.html', context={})

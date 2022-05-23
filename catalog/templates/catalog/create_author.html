@@ -1,8 +1,15 @@
 {% extends "base_generic.html" %} {% block content %}
+{% if req == 'edit' %}
+<form action="/catalog/author/edit/{{ id }}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Update">
+</form>
+{% else %}
 <form action="/catalog/author/create/" method="post">
     {% csrf_token %}
     {{ form }}
-
     <input type="submit" value="Create">
 </form>
+{% endif %}
 {% endblock %}

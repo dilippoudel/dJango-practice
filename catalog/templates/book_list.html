@@ -1,27 +1,33 @@
 {% extends "base_generic.html" %} {% block content %}
 <h1 class="book-heading">Book List</h1>
-<a href="/catalog/book/edit"><button class="btn btn-primary">Create New Book</button></a>
+<a href="/catalog/book/create">
+    <button class="btn btn-primary">Create New Book</button>
+</a>
 
-  {% if book_lists %}
-  <table class="table table-striped" style="background-color:white; margin-top:10px">
+{% if book_lists %}
+<table class="table table-striped" style="background-color:white; margin-top:10px">
     <thead>
     <tr>
-      <th>Book Title</th>
-      <th>Author</th>
+        <th>Book Title</th>
+        <th>Author</th>
     </tr>
     </thead>
     <tbody>
     {% for book in book_lists %}
     <tr>
-      <td><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td>
-      <td><a href="{{ book.author.get_absolute_url }}">{{book.author}}</a></td>
-      <td><a href="{% url 'edit-book' book.id %}"><button class="btn btn-secondary">Edit</button></a><a href="{%url 'delete-book' book.id %}"><button class="btn btn-danger" style="margin-left:10px">Delete</button></a></td>
+        <td><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></td>
+        <td><a href="{{ book.author.get_absolute_url }}">{{book.author}}</a></td>
+        <td><a href="{% url 'edit-book' book.id %}">
+            <button class="btn btn-secondary">Edit</button>
+        </a><a href="{%url 'delete-book' book.id %}">
+            <button class="btn btn-danger" style="margin-left:10px">Delete</button>
+        </a></td>
     </tr>
     {% endfor %}
     </tbody>
-  </table>
-  {% else %}
-  <p>There are no books in the library.</p>
+</table>
+{% else %}
+<p>There are no books in the library.</p>
 
 {% endif %}
 {% endblock %}

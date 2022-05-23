@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% if target == 'editing' %}
+<h2>Editing book </h2>
+<form action="/catalog/book/edit/{{ id }}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+{% else %}
+
+<h2>Create new book </h2>
+<form action="/catalog/book/create/" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+{% endif %}
+{% endblock %}

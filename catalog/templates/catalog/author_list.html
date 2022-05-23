@@ -1,33 +1,40 @@
 {% extends "base_generic.html" %} {% block content %}
 <h1>Author List</h1>
+<a href="/catalog/author/create">
+    <button class="btn btn-primary">Add Author</button>
+</a>
 {% if author_list %}
+
 <table class="table table-striped">
-  <thead>
-  <tr>
-    <th>First Name</th>
-    <th>Date of Birth</th>
-    <th>Date of Death</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for author in author_list %}
-  <tr>
-    <td><a href="{{ author.get_absolute_url }}"
-      >{{author.first_name}} {{ author.last_name }}</a
-    ></td>
-    <td>{{ author.date_of_birth }}</td>
-    <td>{{ author.date_of_death }}</td>
-    <td>
-      <button class="btn btn-secondary">Edit</button>
-      <button class="btn btn-danger">Delete</button>
-    </td>
-  </tr>
-  {% endfor %}
-  </tbody>
+    <thead>
+    <tr>
+        <th>Full Name</th>
+        <th>Date of Birth</th>
+        <th>Date of Death</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for author in author_list %}
+    <tr>
+        <td><a href="{{ author.get_absolute_url }}"
+        >{{author.first_name}} {{ author.last_name }}</a
+        ></td>
+        <td>{{ author.date_of_birth }}</td>
+        <td>{{ author.date_of_death }}</td>
+        <td>
+            <a href="{%url 'edit-author' author.id %}">
+                <button class="btn btn-secondary">Edit</button>
+            </a>
+
+            <a href="{%url 'delete-author' author.id %}">
+                <button class="btn btn-danger">Delete</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
 
 </table>
-
-
 
 
 {% else %}
